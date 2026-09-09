@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Leandro Marcon - gestor de redes, editor de video y desarrollador. Contenido, video publicitario, bots y sitios web.">
+<meta property="og:title" content="Leandro Marcon">
+<meta property="og:description" content="Gestor de redes, editor y desarrollador. Produzco contenido, sitios, bots y publicidad.">
+<meta property="og:type" content="website">
+<title>Leandro Marcón</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Karla:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<style id="pf-style">
+  :root {
+    --ground: #EEF0F3;
+    --surface: #FFFFFF;
+    --ink: #12161D;
+    --muted: #5C6675;
+    --line: #D3D8DF;
+    --accent: #DC4B1E;
+    --accent-soft: rgba(220, 75, 30, 0.09);
+    --pending-ink: #8A5A3F;
+    --shadow: 0 1px 2px rgba(18, 22, 29, 0.05);
+    --lift: 0 6px 24px rgba(18, 22, 29, 0.14);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0E1218;
+      --surface: #161B23;
+      --ink: #E7EBF0;
+      --muted: #939EAD;
+      --line: #272F3A;
+      --accent: #FF6A3C;
+      --accent-soft: rgba(255, 106, 60, 0.13);
+      --pending-ink: #D9A184;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+      --lift: 0 6px 24px rgba(0, 0, 0, 0.55);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0E1218;
+    --surface: #161B23;
+    --ink: #E7EBF0;
+    --muted: #939EAD;
+    --line: #272F3A;
+    --accent: #FF6A3C;
+    --accent-soft: rgba(255, 106, 60, 0.13);
+    --pending-ink: #D9A184;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --lift: 0 6px 24px rgba(0, 0, 0, 0.55);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  img { max-width: 100%; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Karla", ui-sans-serif, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 28px 120px; }
+
+  .draft {
+    background: var(--accent-soft);
+    border-bottom: 1px solid var(--accent);
+    color: var(--pending-ink);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    padding: 9px 28px;
+    text-transform: uppercase;
+  }
+
+  header { padding: 68px 0 44px; }
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 22px;
+  }
+  h1 {
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    font-stretch: 125%;
+    font-size: clamp(2.9rem, 8vw, 5.1rem);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    margin: 0 0 26px;
+    text-wrap: balance;
+  }
+  .thesis {
+    font-size: clamp(1.12rem, 2.4vw, 1.4rem);
+    line-height: 1.5;
+    max-width: 31em;
+    margin: 0 0 34px;
+  }
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+    align-items: center;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 13px;
+  }
+  .contact-row a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--accent);
+    padding-bottom: 1px;
+  }
+  .contact-row a:hover { color: var(--accent); }
+  .contact-row .avail { color: var(--muted); }
+
+  section { padding-top: 60px; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    border-top: 2px solid var(--ink);
+    padding-top: 12px;
+    margin-bottom: 34px;
+  }
+  .sec-head h2 {
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1.06rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .sec-head .note {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .metric { background: var(--surface); padding: 22px 20px 20px; position: relative; }
+  .metric .num {
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 2.15rem;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .metric .num.pending {
+    color: var(--pending-ink);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .metric .lbl {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+  }
+
+  .proj {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 28px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+    position: relative;
+  }
+  .proj:first-of-type { border-top: 1px solid var(--line); }
+  .proj-meta {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    line-height: 1.9;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .proj-meta .kind { color: var(--accent); display: block; }
+  .proj h3 {
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  .proj h3 a { color: inherit; text-decoration: none; border-bottom: 2px solid var(--accent); }
+  .proj h3 a:hover { color: var(--accent); }
+  .proj p { margin: 0 0 12px; max-width: 62ch; }
+  .proj .outcome {
+    color: var(--muted);
+    font-size: 0.95rem;
+    border-left: 2px solid var(--accent);
+    padding-left: 14px;
+    margin-bottom: 14px;
+  }
+  .items { margin: 0 0 14px; padding-left: 18px; max-width: 62ch; }
+  .items li { margin-bottom: 5px; }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .stack .tag {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 3px 7px;
+  }
+  .linkline {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .videos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+  }
+  .vcard, .slot {
+    border-radius: 3px;
+    aspect-ratio: 4 / 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 18px;
+    position: relative;
+    text-decoration: none;
+  }
+  .vcard {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    color: var(--ink);
+  }
+  .vcard:hover { border-color: var(--accent); }
+  .vcard .play {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+  .vcard .vtitle {
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1.02rem;
+    line-height: 1.2;
+  }
+  .vcard .vlink {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+    margin-top: 6px;
+    overflow-wrap: anywhere;
+  }
+  .slot {
+    border: 1.5px dashed var(--accent);
+    background: var(--accent-soft);
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    color: var(--pending-ink);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .slot .n {
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+
+  .services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px 40px;
+  }
+  .svc { position: relative; }
+  .svc h4 {
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    margin: 0 0 7px;
+  }
+  .svc p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+  .toolgroups { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .tgroup {
+    background: var(--surface);
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 22px;
+    padding: 18px 20px;
+    position: relative;
+  }
+  .tgroup .gname {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-top: 3px;
+  }
+  .tgroup .glist { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+  .tgroup .tool {
+    font-size: 0.92rem;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 3px 9px;
+    background: var(--ground);
+  }
+
+  .cta {
+    margin-top: 62px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    padding: 38px 34px;
+  }
+  .cta h2 {
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    font-stretch: 115%;
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  .cta p { margin: 0 0 22px; max-width: 46ch; color: var(--muted); }
+  .cta a.btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #FFFFFF;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 13px 22px;
+    border-radius: 2px;
+  }
+  .cta a.btn:hover { filter: brightness(1.08); }
+
+  a:focus-visible, button:focus-visible, [contenteditable]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ---------- edición ---------- */
+  .toolbar {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 50;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--lift);
+    border-radius: 4px;
+    padding: 8px;
+  }
+  .toolbar button {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--line);
+    background: var(--ground);
+    color: var(--ink);
+    padding: 9px 14px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .toolbar button.primary { background: var(--accent); color: #FFFFFF; border-color: var(--accent); }
+  .toolbar button:hover { filter: brightness(1.06); }
+  .toolbar .status {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    padding: 0 6px;
+    max-width: 210px;
+  }
+
+  .editing [data-path] {
+    outline: 1px dashed var(--line);
+    outline-offset: 3px;
+    border-radius: 2px;
+    min-width: 14px;
+    display: inline-block;
+  }
+  .editing p[data-path], .editing li[data-path] { display: block; }
+  .editing [data-path]:focus { outline: 2px solid var(--accent); background: var(--accent-soft); }
+  .editing [data-path]:empty::before {
+    content: attr(data-ph);
+    color: var(--pending-ink);
+    font-style: italic;
+  }
+
+  .rm {
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--muted);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .rm:hover { color: var(--accent); border-color: var(--accent); }
+  .rm.corner { position: absolute; top: 8px; right: 8px; z-index: 2; }
+  .add {
+    border: 1px dashed var(--accent);
+    background: transparent;
+    color: var(--accent);
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .add:hover { background: var(--accent-soft); }
+  .add-row { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .ed-note {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin: 6px 0 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+  @media (max-width: 680px) {
+    .proj { grid-template-columns: 1fr; gap: 12px; }
+    .tgroup { grid-template-columns: 1fr; gap: 10px; }
+    .wrap { padding: 0 20px 120px; }
+    header { padding: 44px 0 32px; }
+  }
+</style>
+
+</head>
+<body>
+<div id="root"></div>
+
+<script type="application/json" id="pf-data">
+{
+  "draft": false,
+  "draftText": "Borrador — falta completar todo lo marcado en naranja antes de enviarlo",
+  "name": "Leandro Marcón",
+  "eyebrow": "Contenido y video · Desarrollo · Automatización — Grand Bourg, Buenos Aires",
+  "thesis": "Gestor de redes, editor y desarrollador. Produzco contenido, sitios, bots y publicidad, y entrego en días lo que a un equipo le lleva semanas.",
+  "email": "leanmarcon@icloud.com",
+  "phone": "+54 11 6204-2498",
+  "availability": "Remoto · Full time o por proyecto",
+  "metricsNote": "Seis cuentas propias · cuatro plataformas",
+  "metrics": [
+    { "value": "+100 M", "label": "Visualizaciones acumuladas" },
+    { "value": "+5 M", "label": "Me gusta acumulados" },
+    { "value": "191 mil", "label": "Seguidores en mis cuentas" },
+    { "value": "767", "label": "Videos sólo en YouTube" }
+  ],
+  "projectsNote": "Clientes reales, en producción",
+  "projects": [
+    {
+      "kind": "Medio propio",
+      "status": "Activo · Producción diaria",
+      "title": "Ojo Argentino",
+      "url": "https://www.instagram.com/ojoargentino/",
+      "body": [
+        "Medio de deportes y actualidad que armé y opero solo, en Instagram, TikTok, YouTube y Facebook. Incluye el primer noticiero hecho con inteligencia artificial de Argentina.",
+        "Producción completa de punta a punta: guion, generación, edición, publicación y seguimiento. Todos los días, en cuatro plataformas a la vez."
+      ],
+      "items": [
+        "Facebook — Lean Marcon / Ojo Argentino: 79.500 seguidores.",
+        "Instagram — @ojoargentino: 36.000 seguidores.",
+        "YouTube — @Ojoargentina: 33.300 suscriptores y 767 videos.",
+        "TikTok — @ojoargentino: 24.900 seguidores y 402.500 me gusta.",
+        "Instagram — @leanartificial: 7.600 seguidores, contenido de IA.",
+        "Instagram — @leanmarcon_: 10.000 seguidores. Cuenta profesional de contacto."
+      ],
+      "outcome": "191.000 seguidores sumando las cuentas propias, construidos sin pauta y sin equipo.",
+      "stack": ["Instagram", "TikTok", "YouTube", "Facebook", "Video con IA", "Producción diaria"]
+    },
+    {
+      "kind": "Bot + Panel",
+      "status": "Cliente activo",
+      "title": "Carlos — Frigorífico El Noba",
+      "url": "",
+      "body": [
+        "Asistente de WhatsApp para una cadena de carnicerías mayorista y minorista con seis sucursales en el conurbano bonaerense. Responde precios, promociones, horarios, feriados y ubicaciones sin intervención humana.",
+        "Va con un panel de administración a medida: precios, promos, feriados, sucursales, usuarios, historial de conversaciones y reportes. El dueño cambia todo sin llamar a nadie."
+      ],
+      "items": [],
+      "outcome": "El cliente paga una mensualidad por el servicio. Sigue en producción.",
+      "stack": ["WhatsApp API", "Asistente conversacional", "Panel con roles", "Railway"]
+    },
+    {
+      "kind": "Sitio + Catálogo",
+      "status": "En línea",
+      "title": "Sublime Creativa",
+      "url": "https://sublimecreativa.com.ar",
+      "body": [
+        "Sitio y catálogo para una marca de papelería artesanal y souvenirs por encargo. Fichas de producto con mínimos de compra reales, zonas de entrega y posicionamiento local orientado al partido de Pilar."
+      ],
+      "items": [],
+      "outcome": "Le dio presencia propia a un negocio que hasta entonces sólo vendía por Instagram.",
+      "stack": ["Next.js", "App Router", "Supabase", "Vercel", "SEO local"]
+    },
+    {
+      "kind": "Agencia",
+      "status": "One Love · En curso",
+      "title": "Producción audiovisual para One Love",
+      "url": "https://www.valerialansalot.com.ar/",
+      "body": [
+        "Produzco piezas publicitarias para las marcas de la cartera de One Love, agencia de diseño, web y audiovisual. Trabajo la parte de video y de inteligencia artificial dentro de campañas que la agencia lleva de punta a punta."
+      ],
+      "items": [
+        "ELF Lubricantes, TotalEnergies, Ford y Danone.",
+        "Generación, edición y animación de piezas para redes."
+      ],
+      "outcome": "",
+      "stack": ["Video", "Animación", "IA generativa", "Trabajo con agencia"]
+    },
+    {
+      "kind": "Marcas",
+      "status": "Freelance · 2024 — Hoy",
+      "title": "Gestión de marcas y producción publicitaria",
+      "url": "",
+      "body": [
+        "Gestión integral de canales digitales para empresas y negocios: comunicación estratégica, diseño de marca, producción audiovisual y estrategia de ventas.",
+        "Planificación, producción y automatización de contenido, con análisis de métricas para ajustar el rendimiento de cada cliente."
+      ],
+      "items": [
+        "Explosiva, Don Valentín, Latas Billy y Súper Pat, entre otras.",
+        "ELF Lubricantes, Finexcor y Compañía Bernal: piezas publicitarias e institucionales.",
+        "Co-creación audiovisual en alianza con Lungo Films y Habemus Fútbol."
+      ],
+      "outcome": "",
+      "stack": ["Video", "Diseño de marca", "Post-producción", "Métricas"]
+    },
+    {
+      "kind": "Apps",
+      "status": "Propias · En uso",
+      "title": "Herramientas de uso diario",
+      "url": "",
+      "body": [
+        "Aplicaciones chicas que resuelven un problema concreto y se usan todos los días, sin servidor ni cuentas de por medio:"
+      ],
+      "items": [
+        "Cuaderno de ventas — carga una venta en segundos y calcula el margen sola, para una emprendedora que anotaba en papel y nunca sabía cuánto ganaba.",
+        "Rutinas — seguimiento de hábitos y rutinas diarias.",
+        "Contenido diario — organización y planificación de publicaciones.",
+        "Calculadora de gastos — control de gastos y costos del día a día."
+      ],
+      "outcome": "Diseñadas para ganarle al papel en velocidad. Ese suele ser el problema real, no la falta de una planilla.",
+      "stack": ["Web app", "Offline", "Sin servidor"]
+    }
+  ],
+  "videosNote": "Publicadas en las cuentas de cada marca",
+  "videos": [
+    { "title": "ELF Lubricantes — Copa ELF en Termas", "note": "Lubricante oficial del TN · vía One Love", "url": "https://www.instagram.com/reel/DaTtNkOj0v2/?stkn=OHZuejJjdTZleDAy" },
+    { "title": "ELF Lubricantes — Día del Amigo", "note": "Campaña de marca · vía One Love", "url": "https://www.instagram.com/reel/DbBrz_GMbE0/?stkn=MXE1OWRkNGFsMnY3bg==" },
+    { "title": "Finexcor — Hamburguesas", "note": "Pieza de producto", "url": "https://www.instagram.com/reel/DbbHKbZoBVK/?stkn=MXI3eDk3eHBtN2dtZQ==" },
+    { "title": "Compañía Bernal — 9 de Julio", "note": "Campaña institucional · industria cárnica", "url": "https://www.instagram.com/p/Dajmd3fFCK-/?hl=es" }
+  ],
+  "services": [
+    { "title": "Bots de WhatsApp", "text": "Atención automática, catálogo, turnos y consultas frecuentes, con panel para que el cliente lo administre solo." },
+    { "title": "Sitios web y catálogos", "text": "Desarrollo a medida, no plantillas. Rápidos, indexables y pensados para que el negocio los actualice sin llamarme." },
+    { "title": "Video publicitario", "text": "Concepto, generación, edición y animación completa. Piezas para redes y campañas, listas para publicar." },
+    { "title": "Apps y herramientas internas", "text": "Software chico que resuelve un problema puntual de un negocio, del tipo que no justifica contratar a un equipo." },
+    { "title": "Redes y contenido", "text": "Gestión de cuentas y producción de contenido propio, con audiencia construida y sostenida en el tiempo." },
+    { "title": "Capacidad tercerizada", "text": "Para agencias y estudios: absorbo carga cuando están desbordados, con tiempos de entrega que no los frenan." }
+  ],
+  "toolsNote": "Lo que uso todos los días",
+  "tools": [
+    { "group": "Desarrollo", "items": ["Next.js", "React", "JavaScript", "HTML y CSS", "Node.js", "Git y GitHub"] },
+    { "group": "Infraestructura y datos", "items": ["Supabase", "PostgreSQL", "Vercel", "Railway"] },
+    { "group": "Automatización", "items": ["n8n", "WhatsApp Business API"] },
+    { "group": "Video generativo", "items": ["Runway", "Veo", "Higgsfield", "Omni"] },
+    { "group": "Modelos de lenguaje", "items": ["Claude", "Claude Code", "GPT", "Gemini"] },
+    { "group": "Edición y post", "items": ["Adobe Premiere", "CapCut Pro"] },
+    { "group": "Imagen y diseño", "items": ["Canva", "Dzine", "TopLabs"] },
+    { "group": "Redes y analítica", "items": ["Instagram", "TikTok", "YouTube", "Facebook", "Análisis de métricas"] },
+    { "group": "Gestión y sistemas", "items": ["Tango Gestión", "STS"] }
+  ],
+  "ctaTitle": "¿Tenés algo para sacar adelante?",
+  "ctaText": "Trabajo remoto, por proyecto o full time. Contame qué necesitás y te digo en el día si lo puedo hacer y en cuánto tiempo.",
+  "ctaButton": "Escribime"
+}
+</script>
+
+<script id="pf-app">
+(function () {
+  var FONTS = "https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Karla:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap";
+
+  var DATA = JSON.parse(document.getElementById("pf-data").textContent);
+  var editing = false;
+  var artifactApi = null;
+  var status = "";
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+  function get(path) {
+    return path.split(".").reduce(function (o, k) { return o == null ? o : o[k]; }, DATA);
+  }
+  function set(path, val) {
+    var ks = path.split("."), last = ks.pop();
+    var o = ks.reduce(function (o, k) { return o[k]; }, DATA);
+    o[last] = val;
+  }
+  function removeAt(path) {
+    var ks = path.split("."), i = parseInt(ks.pop(), 10);
+    var arr = ks.reduce(function (o, k) { return o[k]; }, DATA);
+    arr.splice(i, 1);
+  }
+  function blank(collection) {
+    if (collection === "metrics") return { value: "", label: "Nuevo dato" };
+    if (collection === "projects") return {
+      kind: "Tipo", status: "", title: "Proyecto nuevo", url: "",
+      body: ["Contá qué es y para quién lo hiciste."], items: [], outcome: "", stack: []
+    };
+    if (collection === "videos") return { title: "", note: "", url: "" };
+    if (collection === "services") return { title: "Servicio", text: "Qué resolvés." };
+    if (collection === "tools") return { group: "Nueva categoría", items: ["Herramienta"] };
+    return "";
+  }
+  function ed(path, ph) {
+    if (!editing) return "";
+    return ' data-path="' + esc(path) + '" contenteditable="true" data-ph="' + esc(ph || "escribí acá") + '"';
+  }
+  function rm(path, corner) {
+    if (!editing) return "";
+    return '<button class="rm' + (corner ? " corner" : "") + '" data-remove="' + esc(path) + '" title="Quitar">quitar</button>';
+  }
+  function add(path, label) {
+    if (!editing) return "";
+    return '<button class="add" data-add="' + esc(path) + '">+ ' + esc(label) + "</button>";
+  }
+
+  function renderHeader() {
+    var h = "";
+    if (DATA.draft) {
+      h += '<div class="draft"><span' + ed("draftText", "aviso de borrador") + ">" + esc(DATA.draftText) + "</span></div>";
+    }
+    h += '<div class="wrap"><header>';
+    h += '<p class="eyebrow"><span' + ed("eyebrow", "rubro y ciudad") + ">" + esc(DATA.eyebrow) + "</span></p>";
+    h += "<h1" + ed("name", "tu nombre") + ">" + esc(DATA.name) + "</h1>";
+    h += '<p class="thesis"><span' + ed("thesis", "tu frase") + ">" + esc(DATA.thesis) + "</span></p>";
+    h += '<div class="contact-row">';
+    if (editing) {
+      h += '<span data-path="email" contenteditable="true" data-ph="tu mail">' + esc(DATA.email) + "</span>";
+    } else {
+      h += '<a href="mailto:' + esc(DATA.email) + '">' + esc(DATA.email) + "</a>";
+    }
+    if (editing) {
+      h += '<span data-path="phone" contenteditable="true" data-ph="tu teléfono">' + esc(DATA.phone || "") + "</span>";
+    } else if (DATA.phone) {
+      h += '<a href="tel:' + esc(DATA.phone.replace(/[^+0-9]/g, "")) + '">' + esc(DATA.phone) + "</a>";
+    }
+    h += '<span class="avail"' + ed("availability", "disponibilidad") + ">" + esc(DATA.availability) + "</span>";
+    h += "</div></header>";
+    return h;
+  }
+
+  function renderSecHead(title, notePath, noteVal) {
+    var h = '<div class="sec-head"><h2>' + esc(title) + "</h2>";
+    if (noteVal !== undefined) {
+      h += '<span class="note"' + ed(notePath, "nota") + ">" + esc(noteVal) + "</span>";
+    }
+    return h + "</div>";
+  }
+
+  function renderMetrics() {
+    var h = "<section>" + renderSecHead("Alcance en redes", "metricsNote", DATA.metricsNote);
+    h += '<div class="metrics">';
+    DATA.metrics.forEach(function (m, i) {
+      h += '<div class="metric">' + rm("metrics." + i, true);
+      if (m.value) {
+        h += '<span class="num"' + ed("metrics." + i + ".value", "número") + ">" + esc(m.value) + "</span>";
+      } else if (editing) {
+        h += '<span class="num pending" data-path="metrics.' + i + '.value" contenteditable="true" data-ph="poné el número"></span>';
+      } else {
+        h += '<span class="num pending">completar</span>';
+      }
+      h += '<span class="lbl"' + ed("metrics." + i + ".label", "qué mide") + ">" + esc(m.label) + "</span>";
+      h += "</div>";
+    });
+    h += "</div>";
+    if (editing) h += '<div class="add-row">' + add("metrics", "agregar dato") + "</div>";
+    return h + "</section>";
+  }
+
+  function renderProjects() {
+    var h = "<section>" + renderSecHead("Trabajos", "projectsNote", DATA.projectsNote);
+    DATA.projects.forEach(function (p, i) {
+      var b = "projects." + i;
+      h += '<article class="proj">' + rm(b, true);
+      h += '<div class="proj-meta"><span class="kind"' + ed(b + ".kind", "tipo") + ">" + esc(p.kind) + "</span>";
+      h += "<span" + ed(b + ".status", "estado") + ">" + esc(p.status) + "</span></div><div>";
+      h += "<h3>";
+      if (editing) {
+        h += '<span data-path="' + b + '.title" contenteditable="true" data-ph="nombre">' + esc(p.title) + "</span>";
+      } else if (p.url) {
+        h += '<a href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.title) + "</a>";
+      } else {
+        h += esc(p.title);
+      }
+      h += "</h3>";
+      if (editing) {
+        h += '<p class="linkline">link: <span data-path="' + b + '.url" contenteditable="true" data-ph="https://… (opcional)">' + esc(p.url) + "</span></p>";
+      }
+      p.body.forEach(function (par, j) {
+        h += "<p" + ed(b + ".body." + j, "párrafo") + ">" + esc(par) + "</p>";
+        if (editing) h += '<p class="ed-note">' + rm(b + ".body." + j) + "</p>";
+      });
+      if (editing) h += '<div class="add-row">' + add(b + ".body", "párrafo") + "</div>";
+      if (p.items.length || editing) {
+        h += '<ul class="items">';
+        p.items.forEach(function (it, j) {
+          h += "<li" + ed(b + ".items." + j, "item") + ">" + esc(it) + "</li>";
+        });
+        h += "</ul>";
+        if (editing) {
+          h += '<div class="add-row">' + add(b + ".items", "item de lista");
+          p.items.forEach(function (it, j) { h += rm(b + ".items." + j); });
+          h += "</div>";
+        }
+      }
+      if (p.outcome || editing) {
+        h += '<p class="outcome"' + ed(b + ".outcome", "el resultado para el cliente") + ">" + esc(p.outcome) + "</p>";
+      }
+      h += '<div class="stack">';
+      p.stack.forEach(function (t, j) {
+        h += '<span class="tag"' + ed(b + ".stack." + j, "tag") + ">" + esc(t) + "</span>";
+        if (editing) h += rm(b + ".stack." + j);
+      });
+      h += (editing ? add(b + ".stack", "tag") : "") + "</div></div></article>";
+    });
+    if (editing) h += '<div class="add-row">' + add("projects", "agregar trabajo") + "</div>";
+    return h + "</section>";
+  }
+
+  function renderVideos() {
+    var h = "<section>" + renderSecHead("Piezas para marcas", "videosNote", DATA.videosNote);
+    h += '<div class="videos">';
+    DATA.videos.forEach(function (v, i) {
+      var b = "videos." + i;
+      if (editing) {
+        h += '<div class="vcard">' + rm(b, true);
+        h += '<div class="play">▶</div>';
+        h += '<div class="vtitle" data-path="' + b + '.title" contenteditable="true" data-ph="título">' + esc(v.title) + "</div>";
+        h += '<div class="vlink" data-path="' + b + '.note" contenteditable="true" data-ph="detalle corto">' + esc(v.note || "") + "</div>";
+        h += '<div class="vlink" data-path="' + b + '.url" contenteditable="true" data-ph="pegá el link">' + esc(v.url) + "</div>";
+        h += "</div>";
+      } else if (v.url) {
+        h += '<a class="vcard" href="' + esc(v.url) + '" target="_blank" rel="noopener">';
+        h += '<div class="play">▶</div>';
+        h += '<div class="vtitle">' + esc(v.title || "Ver video") + "</div>";
+        h += '<div class="vlink">' + esc(v.note || "Ver pieza completa") + "</div></a>";
+      } else {
+        h += '<div class="slot"><span class="n">' + (i + 1) + "</span>Video pendiente</div>";
+      }
+    });
+    h += "</div>";
+    if (editing) h += '<div class="add-row">' + add("videos", "agregar video") + "</div>";
+    return h + "</section>";
+  }
+
+  function renderServices() {
+    var h = "<section>" + renderSecHead("Qué hago");
+    h += '<div class="services">';
+    DATA.services.forEach(function (s, i) {
+      h += '<div class="svc">' + rm("services." + i, true);
+      h += "<h4" + ed("services." + i + ".title", "servicio") + ">" + esc(s.title) + "</h4>";
+      h += "<p" + ed("services." + i + ".text", "descripción") + ">" + esc(s.text) + "</p></div>";
+    });
+    h += "</div>";
+    if (editing) h += '<div class="add-row">' + add("services", "agregar servicio") + "</div>";
+    return h + "</section>";
+  }
+
+  function renderTools() {
+    var h = "<section>" + renderSecHead("Herramientas", "toolsNote", DATA.toolsNote);
+    h += '<div class="toolgroups">';
+    DATA.tools.forEach(function (g, i) {
+      if (!g.items.length && !editing) return;
+      h += '<div class="tgroup">' + rm("tools." + i, true);
+      h += '<div class="gname"' + ed("tools." + i + ".group", "categoría") + ">" + esc(g.group) + "</div>";
+      h += '<div class="glist">';
+      g.items.forEach(function (t, j) {
+        h += '<span class="tool"' + ed("tools." + i + ".items." + j, "herramienta") + ">" + esc(t) + "</span>";
+        if (editing) h += rm("tools." + i + ".items." + j);
+      });
+      h += (editing ? add("tools." + i + ".items", "herramienta") : "") + "</div></div>";
+    });
+    h += "</div>";
+    if (editing) h += '<div class="add-row">' + add("tools", "agregar categoría") + "</div>";
+    return h + "</section>";
+  }
+
+  function renderCta() {
+    var h = '<div class="cta">';
+    h += "<h2" + ed("ctaTitle", "título") + ">" + esc(DATA.ctaTitle) + "</h2>";
+    h += "<p" + ed("ctaText", "texto") + ">" + esc(DATA.ctaText) + "</p>";
+    if (editing) {
+      h += '<span class="btn" style="display:inline-block;background:var(--accent);color:#fff;padding:13px 22px;border-radius:2px;font-family:JetBrains Mono,monospace;font-size:13px;text-transform:uppercase" data-path="ctaButton" contenteditable="true" data-ph="botón">' + esc(DATA.ctaButton) + "</span>";
+    } else {
+      h += '<a class="btn" href="mailto:' + esc(DATA.email) + '">' + esc(DATA.ctaButton) + "</a>";
+    }
+    return h + "</div></div>";
+  }
+
+  function renderHTML() {
+    return renderHeader() + renderMetrics() + renderProjects() + renderVideos() +
+           renderServices() + renderTools() + renderCta();
+  }
+
+  function renderToolbar() {
+    if (!artifactApi) return "";
+    var h = '<div class="toolbar">';
+    if (status) h += '<span class="status">' + esc(status) + "</span>";
+    if (editing) {
+      h += '<button data-act="draft">' + (DATA.draft ? "Quitar borrador" : "Marcar borrador") + "</button>";
+      h += '<button data-act="cancel">Cancelar</button>';
+      h += '<button class="primary" data-act="save">Guardar</button>';
+    } else {
+      h += '<button class="primary" data-act="edit">Editar</button>';
+    }
+    return h + "</div>";
+  }
+
+  var root = document.getElementById("root");
+  var bar = document.createElement("div");
+  document.body.appendChild(bar);
+
+  function paint() {
+    document.body.classList.toggle("editing", editing);
+    root.innerHTML = renderHTML();
+    bar.innerHTML = renderToolbar();
+  }
+
+  root.addEventListener("input", function (e) {
+    var el = e.target.closest && e.target.closest("[data-path]");
+    if (!el || !editing) return;
+    set(el.getAttribute("data-path"), el.textContent.trim());
+  });
+
+  root.addEventListener("click", function (e) {
+    var addBtn = e.target.closest && e.target.closest("[data-add]");
+    if (addBtn) {
+      var p = addBtn.getAttribute("data-add");
+      var arr = get(p);
+      var key = p.split(".").pop();
+      arr.push(blank(key));
+      paint();
+      return;
+    }
+    var rmBtn = e.target.closest && e.target.closest("[data-remove]");
+    if (rmBtn) {
+      removeAt(rmBtn.getAttribute("data-remove"));
+      paint();
+    }
+  });
+
+  bar.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("[data-act]");
+    if (!b) return;
+    var act = b.getAttribute("data-act");
+    if (act === "edit") { editing = true; status = ""; paint(); }
+    else if (act === "cancel") { location.reload(); }
+    else if (act === "draft") { DATA.draft = !DATA.draft; paint(); }
+    else if (act === "save") { save(); }
+  });
+
+  function buildDoc() {
+    var css = document.getElementById("pf-style").textContent;
+    var app = document.getElementById("pf-app").textContent;
+    var wasEditing = editing;
+    editing = false;
+    var markup = renderHTML();
+    editing = wasEditing;
+    var json = JSON.stringify(DATA).replace(/</g, "\\u003c");
+    return '<!doctype html>\n<html lang="es">\n<head>\n<meta charset="utf-8">\n' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+      "<title>" + esc(DATA.name) + "</title>\n" +
+      '<link rel="stylesheet" href="' + FONTS + '">\n' +
+      '<style id="pf-style">' + css + "</style>\n</head>\n<body>\n" +
+      '<div id="root">' + markup + "</div>\n" +
+      '<script type="application/json" id="pf-data">' + json + "<\/script>\n" +
+      '<script id="pf-app">' + app + "<\/script>\n</body>\n</html>";
+  }
+
+  function save() {
+    if (!artifactApi) return;
+    status = "Guardando…";
+    paint();
+    artifactApi.publish(buildDoc()).then(function () {
+      status = "Guardado";
+      editing = false;
+      paint();
+    }).catch(function (err) {
+      var code = err && err.code;
+      if (code === "conflict") status = "Alguien guardó antes. Se recarga con esa versión.";
+      else if (code === "not_granted" || code === "not_writer") status = "No tenés permiso de edición acá.";
+      else status = "No se pudo guardar. Probá de nuevo.";
+      paint();
+    });
+  }
+
+  paint();
+
+  if (window.claude && window.claude.use) {
+    window.claude.use("artifact").then(function (api) {
+      artifactApi = api;
+      paint();
+    }).catch(function () {});
+  }
+})();
+</script>
+
+</body>
+</html>

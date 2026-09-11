@@ -315,38 +315,6 @@
   }
   .svc p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 
-  .bgroup { margin-bottom: 30px; }
-  .bgroup .glabel {
-    font-family: "JetBrains Mono", ui-monospace, monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 3px;
-  }
-  .bgroup .gnote {
-    font-size: 0.88rem;
-    color: var(--muted);
-    margin: 0 0 12px;
-  }
-  .brands {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(176px, 1fr));
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-  }
-  .brand {
-    background: var(--surface);
-    padding: 17px 16px;
-    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
-    font-weight: 800;
-    font-size: 0.97rem;
-    letter-spacing: -0.01em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
   .more-note {
     border-left: 3px solid var(--accent);
     padding: 4px 0 4px 16px;
@@ -568,7 +536,7 @@
       "label": "Videos subidos a YouTube, TikTok e Instagram"
     }
   ],
-  "projectsNote": "Trabajo para clientes y marcas",
+  "projectsNote": "Clientes, agencias y marcas",
   "projects": [
     {
       "kind": "Agencia",
@@ -603,8 +571,7 @@
       "items": [
         "ELF Lubricantes, Finexcor y Compañía Bernal: piezas publicitarias e institucionales.",
         "Aquella Mula Plateada (yerba mate): producción audiovisual, publicidad y video con IA.",
-        "Explosiva, Don Valentín, Latas Billy y Súper Pat, entre otras.",
-        "Co-creación audiovisual en alianza con Lungo Films y Habemus Fútbol."
+        "Explosiva, Don Valentín, Latas Billy y Súper Pat, entre otras."
       ],
       "outcome": "",
       "stack": [
@@ -859,55 +826,7 @@
   "ctaTitle": "¿Tenés algo para sacar adelante?",
   "ctaText": "Trabajo remoto, por proyecto o full time. Contame qué necesitás y te digo en el día si lo puedo hacer y en cuánto tiempo.",
   "ctaButton": "Escribime",
-  "brandsNote": "Cada grupo, el vínculo real",
   "ownNote": "Lo que construí y opero yo",
-  "brandGroups": [
-    {
-      "group": "Vía One Love",
-      "note": "Marcas de la cartera de la agencia",
-      "items": [
-        "ELF Lubricantes",
-        "TotalEnergies",
-        "Danone",
-        "Compañía Bernal",
-        "Finexcor"
-      ]
-    },
-    {
-      "group": "Vía Lungo Films",
-      "note": "Producción audiovisual con la productora",
-      "items": [
-        "Ford"
-      ]
-    },
-    {
-      "group": "Marketing y contenido",
-      "note": "Grabación, publicación y gestión de cuentas",
-      "items": [
-        "Súper Pat",
-        "Don Valentín",
-        "Explosiva",
-        "Latas Billy"
-      ]
-    },
-    {
-      "group": "Servicios digitales",
-      "note": "Webs, catálogos, bots y automatizaciones",
-      "items": [
-        "Frigorífico El Noba",
-        "Sublime Creativa",
-        "Banylac",
-        "Aquella Mula Plateada"
-      ]
-    },
-    {
-      "group": "Colaboraciones",
-      "note": "Canales con los que produje contenido",
-      "items": [
-        "Habemus Fútbol"
-      ]
-    }
-  ],
   "moreProjects": "Y más de 10 proyectos de páginas web y sistemas que no entran acá.",
   "videosLead": "Estos son cuatro ejemplos de más de 50 piezas que produje para marcas. Tocá cualquiera para ver el video completo."
 }
@@ -941,7 +860,6 @@
     arr.splice(i, 1);
   }
   function blank(collection) {
-    if (collection === "brandGroups") return { group: "Nuevo vínculo", note: "", items: ["Marca"] };
     if (collection === "metrics") return { value: "", label: "Nuevo dato" };
     if (collection === "projects") return {
       kind: "Tipo", status: "", title: "Proyecto nuevo", url: "",
@@ -1018,22 +936,8 @@
     return h + "</section>";
   }
 
-  function renderBrands() {
-    var h = "<section>" + renderSecHead("Marcas y empresas con las que trabajo", "brandsNote", DATA.brandsNote);
-    (DATA.brandGroups || []).forEach(function (g, i) {
-      var b = "brandGroups." + i;
-      h += '<div class="bgroup">';
-      h += '<p class="glabel"><span' + ed(b + ".group", "vínculo") + ">" + esc(g.group) + "</span>" + rm(b) + "</p>";
-      h += '<p class="gnote"' + ed(b + ".note", "qué hiciste ahí") + ">" + esc(g.note || "") + "</p>";
-      h += '<div class="brands">';
-      g.items.forEach(function (t, j) {
-        h += '<div class="brand"><span' + ed(b + ".items." + j, "marca") + ">" + esc(t) + "</span>" + rm(b + ".items." + j) + "</div>";
-      });
-      h += "</div>";
-      if (editing) h += '<div class="add-row">' + add(b + ".items", "marca") + "</div>";
-      h += "</div>";
-    });
-    if (editing) h += '<div class="add-row">' + add("brandGroups", "agregar grupo") + "</div>";
+  function renderClients() {
+    var h = "<section>" + renderSecHead("Trabajos", "projectsNote", DATA.projectsNote);
     h += renderProjects("cliente");
     if (DATA.moreProjects) {
       h += '<p class="more-note"' + ed("moreProjects", "proyectos que no entran") + ">" + esc(DATA.moreProjects) + "</p>";
@@ -1174,7 +1078,7 @@
   }
 
   function renderHTML() {
-    return renderHeader() + renderBrands() + renderTools() + renderVideos() +
+    return renderHeader() + renderClients() + renderTools() + renderVideos() +
            renderOwn() + renderMetrics() + renderServices() + renderCta();
   }
 

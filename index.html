@@ -185,6 +185,7 @@
     position: relative;
   }
   .proj:first-of-type { border-top: 1px solid var(--line); }
+  section > .proj:first-of-type { border-top: 1px solid var(--line); }
   .proj-meta {
     font-family: "JetBrains Mono", ui-monospace, monospace;
     font-size: 11.5px;
@@ -313,6 +314,26 @@
     margin: 0 0 7px;
   }
   .svc p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+  .brands {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(176px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-bottom: 40px;
+  }
+  .brand {
+    background: var(--surface);
+    padding: 17px 16px;
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 0.97rem;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 
   .toolgroups { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
   .tgroup {
@@ -499,8 +520,8 @@
       "label": "Me gusta acumulados"
     },
     {
-      "value": "191 mil",
-      "label": "Seguidores en mis cuentas"
+      "value": "326 mil",
+      "label": "Seguidores, propias y co-gestionadas"
     },
     {
       "value": "767",
@@ -527,7 +548,8 @@
         "Animación",
         "IA generativa",
         "Trabajo con agencias"
-      ]
+      ],
+      "group": "cliente"
     },
     {
       "kind": "Marcas",
@@ -539,8 +561,9 @@
         "Planificación, producción y automatización de contenido, con análisis de métricas para ajustar el rendimiento de cada cliente."
       ],
       "items": [
-        "Explosiva, Don Valentín, Latas Billy y Súper Pat, entre otras.",
         "ELF Lubricantes, Finexcor y Compañía Bernal: piezas publicitarias e institucionales.",
+        "Aquella Mula Plateada (yerba mate): producción audiovisual, publicidad y video con IA.",
+        "Explosiva, Don Valentín, Latas Billy y Súper Pat, entre otras.",
         "Co-creación audiovisual en alianza con Lungo Films y Habemus Fútbol."
       ],
       "outcome": "",
@@ -549,24 +572,44 @@
         "Diseño de marca",
         "Post-producción",
         "Métricas"
-      ]
+      ],
+      "group": "cliente"
     },
     {
-      "kind": "Bots + Panel",
-      "status": "Clientes activos",
-      "title": "Frigorífico El Noba, Banylac y Suplaris",
+      "kind": "Bot + Panel",
+      "status": "Cliente activo",
+      "title": "Frigorífico El Noba",
       "url": "",
       "body": [
-        "Asistentes de WhatsApp con panel de administración propio, para que el negocio maneje todo sin tocar código: precios, promociones, feriados, sucursales, usuarios, historial de conversaciones y reportes.",
-        "En Frigorífico El Noba, una cadena de carnicerías mayorista y minorista con seis sucursales, el asistente responde precios, promociones, horarios, feriados y ubicaciones sin intervención humana."
+        "Asistente de WhatsApp para una cadena de carnicerías mayorista y minorista con seis sucursales. Responde precios, promociones, horarios, feriados y ubicaciones sin intervención humana.",
+        "Va con un panel de administración propio: precios, promos, feriados, sucursales, usuarios, historial de conversaciones y reportes. El dueño cambia todo sin tocar código."
       ],
       "items": [],
-      "outcome": "El Noba paga una mensualidad por el servicio. Sigue en producción.",
+      "outcome": "El cliente paga una mensualidad por el servicio. Sigue en producción.",
       "stack": [
         "WhatsApp API",
         "Asistente conversacional",
         "Panel con roles",
         "Railway"
+      ],
+      "group": "cliente"
+    },
+    {
+      "kind": "Sitio + Catálogo",
+      "status": "En línea",
+      "title": "Banylac",
+      "url": "",
+      "group": "cliente",
+      "body": [
+        "Sitio web con sistema de catálogo y derivación directa a WhatsApp: el visitante recorre los productos y pasa a la conversación con el pedido ya armado, sin formularios de por medio."
+      ],
+      "items": [],
+      "outcome": "Le sacó al negocio el ida y vuelta de responder qué hay y cuánto sale.",
+      "stack": [
+        "Web",
+        "Catálogo",
+        "WhatsApp",
+        "Derivación directa"
       ]
     },
     {
@@ -585,7 +628,8 @@
         "Supabase",
         "Vercel",
         "SEO local"
-      ]
+      ],
+      "group": "cliente"
     },
     {
       "kind": "Apps",
@@ -606,7 +650,8 @@
         "Web app",
         "Offline",
         "Sin servidor"
-      ]
+      ],
+      "group": "propio"
     },
     {
       "kind": "Medio propio",
@@ -623,9 +668,10 @@
         "YouTube — @Ojoargentina: 33.300 suscriptores y 767 videos.",
         "TikTok — @ojoargentino: 24.900 seguidores y 402.500 me gusta.",
         "Instagram — @leanartificial: 7.600 seguidores, contenido de IA.",
-        "Instagram — @leanmarcon_: 10.000 seguidores. Cuenta profesional de contacto."
+        "Instagram — @leanmarcon_: 10.000 seguidores. Cuenta profesional de contacto.",
+        "Instagram — @elmaestrodela.ia: 135.000 seguidores. Cuenta co-gestionada."
       ],
-      "outcome": "191.000 seguidores sumando las cuentas propias, construidos sin pauta y sin equipo.",
+      "outcome": "326.000 seguidores sumando cuentas propias y co-gestionadas, construidos sin pauta.",
       "stack": [
         "Instagram",
         "TikTok",
@@ -633,10 +679,11 @@
         "Facebook",
         "Video con IA",
         "Producción diaria"
-      ]
+      ],
+      "group": "propio"
     }
   ],
-  "videosNote": "Cuatro ejemplos de más de 50 piezas producidas",
+  "videosNote": "Cuatro de más de 50 piezas producidas",
   "videos": [
     {
       "title": "ELF Lubricantes — Copa ELF en Termas",
@@ -767,7 +814,28 @@
   ],
   "ctaTitle": "¿Tenés algo para sacar adelante?",
   "ctaText": "Trabajo remoto, por proyecto o full time. Contame qué necesitás y te digo en el día si lo puedo hacer y en cuánto tiempo.",
-  "ctaButton": "Escribime"
+  "ctaButton": "Escribime",
+  "brandsNote": "Trabajo en curso y proyectos entregados",
+  "brands": [
+    "ELF Lubricantes",
+    "TotalEnergies",
+    "Ford",
+    "Danone",
+    "Finexcor",
+    "Compañía Bernal",
+    "Aquella Mula Plateada",
+    "Frigorífico El Noba",
+    "Banylac",
+    "Explosiva",
+    "Don Valentín",
+    "Latas Billy",
+    "Súper Pat",
+    "Sublime Creativa",
+    "One Love",
+    "Lungo Films",
+    "Habemus Fútbol"
+  ],
+  "ownNote": "Lo que construí y opero yo"
 }
 </script>
 
@@ -799,6 +867,7 @@
     arr.splice(i, 1);
   }
   function blank(collection) {
+    if (collection === "brands") return "Marca nueva";
     if (collection === "metrics") return { value: "", label: "Nuevo dato" };
     if (collection === "projects") return {
       kind: "Tipo", status: "", title: "Proyecto nuevo", url: "",
@@ -875,9 +944,26 @@
     return h + "</section>";
   }
 
-  function renderProjects() {
-    var h = "<section>" + renderSecHead("Trabajos", "projectsNote", DATA.projectsNote);
+  function renderBrands() {
+    var h = "<section>" + renderSecHead("Marcas y empresas que confían en mi trabajo", "brandsNote", DATA.brandsNote);
+    h += '<div class="brands">';
+    (DATA.brands || []).forEach(function (t, i) {
+      h += '<div class="brand"><span' + ed("brands." + i, "marca") + ">" + esc(t) + "</span>" + rm("brands." + i) + "</div>";
+    });
+    h += "</div>";
+    if (editing) h += '<div class="add-row">' + add("brands", "agregar marca") + "</div>";
+    return h + renderProjects("cliente", null, null) + "</section>";
+  }
+
+  function renderOwn() {
+    return "<section>" + renderSecHead("Proyectos propios", "ownNote", DATA.ownNote) +
+           renderProjects("propio", null, null) + "</section>";
+  }
+
+  function renderProjects(grupo) {
+    var h = "";
     DATA.projects.forEach(function (p, i) {
+      if (grupo && p.group !== grupo) return;
       var b = "projects." + i;
       h += '<article class="proj">' + rm(b, true);
       h += '<div class="proj-meta"><span class="kind"' + ed(b + ".kind", "tipo") + ">" + esc(p.kind) + "</span>";
@@ -922,11 +1008,11 @@
       h += (editing ? add(b + ".stack", "tag") : "") + "</div></div></article>";
     });
     if (editing) h += '<div class="add-row">' + add("projects", "agregar trabajo") + "</div>";
-    return h + "</section>";
+    return h;
   }
 
   function renderVideos() {
-    var h = "<section>" + renderSecHead("Piezas para marcas", "videosNote", DATA.videosNote);
+    var h = "<section>" + renderSecHead("Ejemplos de piezas", "videosNote", DATA.videosNote);
     h += '<div class="videos">';
     DATA.videos.forEach(function (v, i) {
       var b = "videos." + i;
@@ -996,8 +1082,8 @@
   }
 
   function renderHTML() {
-    return renderHeader() + renderVideos() + renderProjects() + renderMetrics() +
-           renderServices() + renderTools() + renderCta();
+    return renderHeader() + renderBrands() + renderTools() + renderVideos() +
+           renderOwn() + renderMetrics() + renderServices() + renderCta();
   }
 
   function renderToolbar() {

@@ -412,6 +412,12 @@
     border-radius: 2px;
   }
   .cta a.btn:hover { filter: brightness(1.08); }
+  .cta .cta-alt {
+    margin: 14px 0 0;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+  .cta .cta-alt a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); }
 
   a:focus-visible, button:focus-visible, [contenteditable]:focus-visible {
     outline: 2px solid var(--accent);
@@ -849,11 +855,13 @@
   ],
   "ctaTitle": "¿Tenés algo para sacar adelante?",
   "ctaText": "Trabajo remoto, por proyecto o full time. Contame qué necesitás y te digo en el día si lo puedo hacer y en cuánto tiempo.",
-  "ctaButton": "Escribime",
+  "ctaButton": "Escribime por WhatsApp",
   "ownNote": "Lo que construí y opero yo",
   "moreProjects": "Y más de 10 proyectos de páginas web y sistemas que no entran acá.",
   "videosLead": "Seis ejemplos de más de 50 piezas que produje para marcas. Cada una abre la publicación real en la cuenta de la marca.",
-  "proof": "Todo lo que ves acá es real y comprobable: cada trabajo enlaza a donde está publicado."
+  "proof": "Todo lo que ves acá es real y comprobable: cada trabajo enlaza a donde está publicado.",
+  "whatsapp": "https://wa.me/5491162042498?text=Hola%20Leandro%2C%20vi%20tu%20portfolio%20y%20quer%C3%ADa%20consultarte%20por%20un%20proyecto.",
+  "ctaAlt": "o por mail a"
 }
 </script>
 
@@ -929,7 +937,7 @@
     if (editing) {
       h += '<span data-path="phone" contenteditable="true" data-ph="tu teléfono">' + esc(DATA.phone || "") + "</span>";
     } else if (DATA.phone) {
-      h += '<a href="tel:' + esc(DATA.phone.replace(/[^+0-9]/g, "")) + '">' + esc(DATA.phone) + "</a>";
+      h += '<a href="' + esc(DATA.whatsapp || ("tel:" + DATA.phone.replace(/[^+0-9]/g, ""))) + '" target="_blank" rel="noopener">' + esc(DATA.phone) + " · WhatsApp</a>";
     }
     h += '<span class="avail"' + ed("availability", "disponibilidad") + ">" + esc(DATA.availability) + "</span>";
     h += "</div></header>";
@@ -1099,8 +1107,12 @@
     h += "<p" + ed("ctaText", "texto") + ">" + esc(DATA.ctaText) + "</p>";
     if (editing) {
       h += '<span class="btn" style="display:inline-block;background:var(--accent);color:#fff;padding:13px 22px;border-radius:2px;font-family:JetBrains Mono,monospace;font-size:13px;text-transform:uppercase" data-path="ctaButton" contenteditable="true" data-ph="botón">' + esc(DATA.ctaButton) + "</span>";
+      h += '<p class="linkline" style="margin-top:12px">whatsapp: <span data-path="whatsapp" contenteditable="true" data-ph="https://wa.me/...">' + esc(DATA.whatsapp || "") + "</span></p>";
     } else {
-      h += '<a class="btn" href="mailto:' + esc(DATA.email) + '">' + esc(DATA.ctaButton) + "</a>";
+      h += '<a class="btn" href="' + esc(DATA.whatsapp || ("mailto:" + DATA.email)) + '" target="_blank" rel="noopener">' + esc(DATA.ctaButton) + "</a>";
+      if (DATA.ctaAlt) {
+        h += '<p class="cta-alt">' + esc(DATA.ctaAlt) + ' <a href="mailto:' + esc(DATA.email) + '">' + esc(DATA.email) + "</a></p>";
+      }
     }
     return h + "</div></div>";
   }

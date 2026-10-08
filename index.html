@@ -15,7 +15,21 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://leanmarcon-beep.github.io/preview.png">
 <title>Leandro Marcón</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Karla:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<!-- Tipografías servidas desde el sitio (licencia OFL, ver /fonts): la página aparece antes que pidiéndolas a Google. -->
+<link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/karla.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: 'Archivo'; font-style: normal; font-weight: 400; font-stretch: 100%; font-display: swap; src: url(/fonts/archivo.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Archivo'; font-style: normal; font-weight: 600; font-stretch: 100%; font-display: swap; src: url(/fonts/archivo.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Archivo'; font-style: normal; font-weight: 800; font-stretch: 100%; font-display: swap; src: url(/fonts/archivo.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/jetbrains-mono.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 700; font-display: swap; src: url(/fonts/jetbrains-mono.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Karla'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/karla.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Karla'; font-style: normal; font-weight: 500; font-display: swap; src: url(/fonts/karla.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Karla'; font-style: normal; font-weight: 700; font-display: swap; src: url(/fonts/karla.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+</style>
 <style id="pf-style">
   :root {
     --ground: #EEF0F3;
@@ -23,7 +37,7 @@
     --ink: #12161D;
     --muted: #5C6675;
     --line: #D3D8DF;
-    --accent: #DC4B1E;
+    --accent: #B93A12; /* un poco más oscuro que el #DC4B1E de antes: la letra chica se lee bien (5:1) */
     --accent-soft: rgba(220, 75, 30, 0.09);
     --pending-ink: #8A5A3F;
     --shadow: 0 1px 2px rgba(18, 22, 29, 0.05);
@@ -326,7 +340,7 @@
     gap: 30px 40px;
   }
   .svc { position: relative; }
-  .svc h4 {
+  .svc h3 {
     font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
     font-weight: 800;
     font-size: 1rem;
@@ -1089,7 +1103,7 @@
     h += '<div class="services">';
     DATA.services.forEach(function (s, i) {
       h += '<div class="svc">' + rm("services." + i, true);
-      h += "<h4" + ed("services." + i + ".title", "servicio") + ">" + esc(s.title) + "</h4>";
+      h += "<h3" + ed("services." + i + ".title", "servicio") + ">" + esc(s.title) + "</h3>";
       h += "<p" + ed("services." + i + ".text", "descripción") + ">" + esc(s.text) + "</p></div>";
     });
     h += "</div>";
